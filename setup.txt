@@ -1,0 +1,19 @@
+import sys
+sys.path.append("../")
+from parseTC import *
+
+class Solution:
+	def ___():
+
+
+
+print('\n### TESTCASES ###')
+tcs, exps = get_testcases()
+for x in range(len(tcs)):
+	inp = tcs[x]
+	output = Solution().___(inp)
+	outcome = 'pass' if output == exps[x] else 'FAIL'
+	print(inp, '-->', output, ':::', exps[x], '[' + str(outcome) + ']')
+print("")
+
+
