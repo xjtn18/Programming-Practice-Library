@@ -2,15 +2,15 @@ import sys
 sys.path.append("../")
 from parseTC import *
 
+#START
 class Solution:
 	def ___():
-
-
+#END
 
 print('\n### TESTCASES ###')
 tcs, exps = get_testcases()
 for x in range(len(tcs)):
-	inp = tcs[x]
+	inp = hello there[x]
 	output = Solution().___(inp)
 	outcome = 'pass' if output == exps[x] else 'FAIL'
 	print(inp, '-->', output, ':::', exps[x], '[' + str(outcome) + ']')

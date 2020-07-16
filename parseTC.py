@@ -10,16 +10,13 @@ def get_testcases():
 
 	with open('testcases.txt' , 'r') as f:
 		cases = f.readlines()
-	
+
 	for case in cases:
 		inp, exp = re.split(splitOn, case)
 		inp = inp.strip()
 		exp = exp.strip()
 		exec('testcases.append('+inp+')')
 		exec('expecteds.append('+exp+')')
-	
+
 	return testcases, expecteds
-
-
-
 
