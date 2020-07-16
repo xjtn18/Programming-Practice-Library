@@ -11,6 +11,9 @@ START_DELIM = '#START'
 END_DELIM = '#END'
 
 cwd = os.getcwd() + '/'
+if len(sys.argv) == 1: # if no directory argument given
+	print("No problem directory given.")
+	exit()
 problemDir = sys.argv[1]
 problemPath = cwd + problemDir + 'sol.py'
 
