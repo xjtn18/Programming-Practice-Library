@@ -15,7 +15,7 @@ def get_testcases():
         inp, exp = re.split(splitOn, case)
         inp = inp.strip()
         exp = exp.strip()
-        exec('testcases.append('+inp+')')
+        exec('testcases.append("'+inp+'")')
         exec('expecteds.append('+exp+')')
 
     return testcases, expecteds
