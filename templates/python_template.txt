@@ -1,3 +1,10 @@
+######################################################
+#  Author: Jacob Nardone
+#  Date created:
+#  File type: C++ source file
+#  Description:
+######################################################
+
 import sys
 sys.path.append("../")
 from parseTC import *
