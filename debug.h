@@ -53,7 +53,38 @@ void buffer(T input){
 }
 
 
+struct ListNode {
+	int val;
+	ListNode* next;
+	ListNode() : val(0), next(nullptr) {}
+	ListNode(int x) : val(x), next(nullptr) {}
+	ListNode(int x, ListNode *next) : val(x), next(next) {}
+};
 
 
+template <typename T>
+ListNode* createLL(std::vector<T> v){
+	ListNode* head = new ListNode(v[0]);
+	ListNode* curr = head;
+	for (int i = 1; i < v.size(); ++i){
+		curr->next = new ListNode(v[i]);
+		curr = curr->next;
+	}
+	return head;
+}
+
+
+void log(ListNode* head){
+	if (!head){
+		std::cout << "Empty" << std::endl;
+		return;
+	}
+	ListNode* curr = head;
+	while (curr->next){
+		std::cout << curr->val << " - ";
+		curr = curr->next;
+	}
+	std::cout << curr->val << "\n";
+}
 
 

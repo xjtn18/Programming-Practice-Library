@@ -13,7 +13,7 @@ then
 	exit 1
 fi
 
-if [ "$lang" = "python" ];
+if [ $lang = "python" ];
 then
 	mkdir $pname
 	touch $pname/testcases.txt
