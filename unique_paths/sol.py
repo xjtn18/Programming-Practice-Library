@@ -2,13 +2,15 @@
 #  Author: Jacob Nardone
 #  Date created: 9/17/2020
 #  File type: Py file
-#  Description: Simple DP problem, summing unique paths to bottom corner of memo array
+#  Description: Simple DP problem, summing unique paths to bottom corner of memo array.
+#   - Theres also a much better discrete math solution that is all O(1) instead of O(N)
 ######################################################
 
 import sys
 sys.path.append("../")
 from parseTC import *
 
+from math import factorial
 
 #START
 class Solution:
@@ -19,6 +21,12 @@ class Solution:
             for y in range(1, n+1):
                 memo[x][y] = memo[x-1][y] + memo[x][y-1]
         return memo[m][n]
+
+
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        # The problem can also be thought of as "how many ways can we arrange m-1 down movements and n-1 right movements"
+        return int(factorial(m-1+n-1) / (factorial(m-1) * factorial(n-1)))
 #END
 
 

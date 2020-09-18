@@ -1,9 +1,9 @@
-/*
- * Author: Jacob Nardone
- * Date created:
- * File type: C++ source file
- * Description:
-*/
+//////////////////////////////////////////////////////
+//  Author: Jacob Nardone
+//  Date created:
+//  File type: C++ source file
+//  Description:
+//////////////////////////////////////////////////////
 
 
 #include <iostream>
