@@ -1,23 +1,41 @@
+//////////////////////////////////////////////////////
+//  Author: Jacob Nardone
+//  Date created: 6/17/2020
+//  File type: C++ header file
+//  Description: Helper functions I made to debug/log (print) objects, strings, etc. and to create/initialize common data structures. This helps especially when creating test cases.
+//////////////////////////////////////////////////////
+
 #pragma once
 #include <unistd.h>
 #include <thread>
 #include <vector>
 #include <iostream>
+#include <queue>
 
-#define PRINT_DEBUG 1 // set this to 0 if you dont want to see any of your debug prints
+#define kDEBUG 1 // set this to 0 if you dont want to see any of your logs
 
-//declarations
+
+////////////////////////////////////////
+// Log functions
+////////////////////////////////////////
+
+template <typename T>
+void buffer(T input){
+	std::cout << input << std::endl;
+	std::string _;
+	std::getline(std::cin, _);
+}
 
 
 // this template prints anything (singular value)
 template <typename T>
-void log(T x, bool nl = true, uint sleeptime = 5){
-	if (!PRINT_DEBUG)
+void log(T x, bool nl = true, unsigned int sleeptime = 0){
+	if (!kDEBUG)
 		return;
 	std::cout << x;
 	if (nl)
 		std::cout << "\n";
-	usleep(sleeptime * 100000);
+	//usleep(sleeptime * 100000);
 }
 
 
@@ -34,25 +52,29 @@ void log(T* x, int len){
 
 }
 
+// this template prints vectors
 template <typename T>
-void log(std::vector<T> v){
+void log(std::vector<T> v, bool nl = true){
 	std::cout << '[';
 	for (int i = 0; i < v.size(); ++i){
-		std::cout << v[i];
+		log (v[i], false);
 		if (i != v.size()-1)
 			std::cout << ", ";
 	}
-	std::cout << ']' << std::endl;
-}
-
-template <typename T>
-void buffer(T input){
-	std::cout << input << std::endl;
-	std::string _;
-	std::getline(std::cin, _);
+	std::cout << ']';
+	if (nl) std::cout << "\n";
 }
 
 
+
+
+
+////////////////////////////////////////
+// Linked Lists
+////////////////////////////////////////
+
+
+// standard (LeetCode) linked list node structure
 struct ListNode {
 	int val;
 	ListNode* next;
@@ -62,8 +84,12 @@ struct ListNode {
 };
 
 
+// template to intitialize and fill a linked list from a given vector
 template <typename T>
 ListNode* createLL(std::vector<T> v){
+	if (v.empty()){
+		return nullptr;
+	}
 	ListNode* head = new ListNode(v[0]);
 	ListNode* curr = head;
 	for (int i = 1; i < v.size(); ++i){
@@ -74,6 +100,7 @@ ListNode* createLL(std::vector<T> v){
 }
 
 
+// Print a Linked List
 void log(ListNode* head){
 	if (!head){
 		std::cout << "Empty" << std::endl;
@@ -86,5 +113,52 @@ void log(ListNode* head){
 	}
 	std::cout << curr->val << "\n";
 }
+
+
+
+
+
+
+////////////////////////////////////////
+// Binary Trees
+////////////////////////////////////////
+
+
+// standard (LeetCode) binary tree node structure
+struct TreeNode {
+	int val;
+	TreeNode *left;
+	TreeNode *right;
+	TreeNode() : val(0), left(nullptr), right(nullptr) {}
+	TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
+};
+
+// recursive function that fills binary tree row by row left to right
+template <typename T>
+void fill(TreeNode* node, std::vector<T> v, int i){
+	node->val = v[i]; // assign value
+	if (2*i+1 < v.size()){
+		node->left = new TreeNode();
+		fill(node->left, v, 2*i+1);
+	}
+	if (2*i+2 < v.size()){
+		node->right = new TreeNode();
+		fill(node->right, v, 2*i+2);
+	}
+}
+
+
+// initialize and fill a binary tree (row by row) from a given vector
+template <typename T>
+TreeNode* createBinaryTree(std::vector<T> v){
+	if (v.empty()) return nullptr;
+	TreeNode* head = new TreeNode(v[0]);
+	fill(head, v, 0);
+	return head;
+
+}
+
+
 
 

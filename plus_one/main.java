@@ -21,6 +21,7 @@ public class main {
 
 	public static <T> void log(T s){
 		System.out.println(s);
+		int thing = new int(5);
 	}
 
 	public static void alog(int[] s){

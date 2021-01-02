@@ -1,4 +1,5 @@
 *.swp
 *.pyc
+*.stackdump
 __pycache__/
 tags
