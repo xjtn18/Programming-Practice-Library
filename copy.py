@@ -16,7 +16,7 @@ if len(sys.argv) == 1: # if no directory argument given
    exit()
 
 problemDir = sys.argv[1]
-problemPath = cwd + problemDir + 'sol.py'
+problemPath = cwd + problemDir + '/sol.py'
 
 with open(problemPath, 'r') as f:
    text = f.read()
