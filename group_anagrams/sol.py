@@ -11,9 +11,8 @@ sys.path.append("../")
 from parseTC import *
 
 from collections import defaultdict
-from operator import mul, add
+from operator import mul
 from functools import reduce
-from math import sqrt
 
 """
 Idea:
