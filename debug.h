@@ -11,6 +11,7 @@
 #include <vector>
 #include <iostream>
 #include <queue>
+#include <cmath>
 
 #define kDEBUG 1 // set this to 0 if you dont want to see any of your logs
 
@@ -134,9 +135,16 @@ struct TreeNode {
 	TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
 };
 
+
 // recursive function that fills binary tree row by row left to right
 template <typename T>
 void fill(TreeNode* node, std::vector<T> v, int i){
+
+	if (v[i] == NAN){
+		node = nullptr;
+		return;
+	}
+
 	node->val = v[i]; // assign value
 	if (2*i+1 < v.size()){
 		node->left = new TreeNode();

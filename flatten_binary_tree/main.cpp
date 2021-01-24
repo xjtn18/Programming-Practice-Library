@@ -13,8 +13,9 @@
 
 
 void flatten(TreeNode* node){
-	// if nullptr or if this is a child node
-	if (!node || (!(node->left) && !(node->right))) return;
+	if (!node || (!node->left && !node->right)){
+		return;
+	}
 
 	if (node->left){
 		flatten(node->left);
@@ -31,12 +32,13 @@ void flatten(TreeNode* node){
 	if (node->right){
 		flatten(node->right);
 	}
+
 }
 
 
 
 int main(){
-	TreeNode* root = createBinaryTree(std::vector<int>{1,2,5,3,4,NULL,6});
+	TreeNode* root = createBinaryTree(std::vector<int>{1,2,5,3,4,0,6});
 	flatten(root);
 	TreeNode* n = root;
 	while (n){
