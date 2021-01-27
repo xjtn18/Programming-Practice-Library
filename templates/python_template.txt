@@ -12,7 +12,7 @@ from parseTC import *
 
 #START
 class Solution:
-	def ___():
+	def ___(self):
 #END
 
 

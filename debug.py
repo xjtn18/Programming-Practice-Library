@@ -3,6 +3,32 @@
 
 
 from collections import deque
+import heapq
+
+class MyHeap:
+    def __init__(self, _isMaxHeap = False):
+        self.heap = []
+        self.isMaxHeap = _isMaxHeap
+
+    def top(self) -> int:
+        if len(self.heap) == 0:
+            return None
+            
+        return self._checkFlip() * self.heap[0]
+
+    def pop(self) -> int:
+        return self._checkFlip() * heapq.heappop(self.heap)
+
+    def push(self, num : int) -> int:
+        return heapq.heappush(self.heap, self._checkFlip() * num)
+
+    def _checkFlip(self) -> int:
+        return -(2 * int(self.isMaxHeap) - 1)
+
+    def __len__(self):
+        return len(self.heap)
+
+
 
 class TreeNode:
 

@@ -1,38 +1,42 @@
 #!/bin/bash
-while getopts n:l: flag
+while getopts n:l:d: flag
 do
 	case "${flag}" in
 		n) pname=${OPTARG};;
 		l) lang=${OPTARG};;
+		d) diff=${OPTARG};;
 	esac
 done
 
-if [ -d $pname ];
+dir="_${diff}/${pname}"
+
+if [ -d $dir ];
 then
-	printf "Error: directory with this name already exists.\n"
+	printf "Error: directory with this name already exists here.\n"
 	exit 1
 fi
 
 if [ $lang = "python" ];
 then
-	mkdir $pname
-	touch $pname/testcases.txt
-	cp templates/python_template.txt $pname/sol.py
+	mkdir $dir
+	touch $dir/testcases.txt
+	cp templates/python_template.txt $dir/sol.py
 	printf "Created \'$pname\' python directory.\n"
 
 elif [ $lang = "cpp" ];
 then
-	mkdir $pname
-	cp templates/cpp_template.txt $pname/main.cpp
+	mkdir $dir
+	cp templates/cpp_template.txt $dir/main.cpp
 	printf "Created \'$pname\' cpp directory.\n"
 
 elif [ $lang = "java" ];
 then
-	mkdir $pname
-	cp templates/java_template.txt $pname/main.java
+	mkdir $dir
+	cp templates/java_template.txt $dir/main.java
 	printf "Created \'$pname\' java directory.\n"
 
 else
-	printf "Invalid / unsupported template language\n"
+	printf "Invalid / no template for language\n"
 fi
 
+sleep 1
