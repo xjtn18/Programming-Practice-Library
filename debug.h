@@ -12,6 +12,7 @@
 #include <iostream>
 #include <queue>
 #include <cmath>
+#include <sstream>
 
 #define kDEBUG 1 // set this to 0 if you dont want to see any of your logs
 
@@ -137,15 +138,15 @@ struct TreeNode {
 
 
 // recursive function that fills binary tree row by row left to right
-template <typename T>
-void fill(TreeNode* node, std::vector<T> v, int i){
+void fill(TreeNode* node, std::vector<std::string> v, int i){
 
-	if (v[i] == NAN){
+	if (v[i] == "null"){
 		node = nullptr;
 		return;
 	}
 
-	node->val = v[i]; // assign value
+	node->val = std::stoi(v[i]); // assign value
+
 	if (2*i+1 < v.size()){
 		node->left = new TreeNode();
 		fill(node->left, v, 2*i+1);
@@ -158,10 +159,17 @@ void fill(TreeNode* node, std::vector<T> v, int i){
 
 
 // initialize and fill a binary tree (row by row) from a given vector
-template <typename T>
-TreeNode* createBinaryTree(std::vector<T> v){
-	if (v.empty()) return nullptr;
-	TreeNode* head = new TreeNode(v[0]);
+TreeNode* createBinaryTree(std::string vstr){
+	if (vstr == "") return nullptr;
+	std::vector<std::string> v;
+	std::stringstream ss(vstr);
+	std::string numstr;
+	while (getline(ss,numstr,',')){
+		v.push_back(numstr);
+	}
+	log(v);
+
+	TreeNode* head = new TreeNode(stoi(v[0]));
 	fill(head, v, 0);
 	return head;
 

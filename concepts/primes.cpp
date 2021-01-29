@@ -1,4 +1,3 @@
-#include <cmath>
 #include <iostream>
 #include <set>
 
@@ -16,7 +15,7 @@ bool isPrime(int num){
 	if (num % 2 == 0)
 		return false;
 
-	for (int j = 3; j < floor(num / 2)+1; j+=2){
+	for (int j = 3; j < num / 2; j+=2){
 		if (num % j == 0)
 			return false;
 	}
