@@ -53,7 +53,25 @@ class TreeNode:
             d.append(node.right)
 
         return s
-        
+
+    def __repr__(self) -> str:
+        return str(self.val)
+
+
+class ListNode:
+    def __init__(self, init_val = 0, init_next = None):
+        self.val = init_val
+        self.next = init_next
+
+    def __str__(self) -> str:  # preorder print
+        s = ""
+        node = self
+        print("[ ", end="")
+        while node:
+            print(node.val, end=" ")
+            node = node.next
+        print("]")
+        return s
 
 
 

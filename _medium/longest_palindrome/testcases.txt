@@ -1,0 +1,6 @@
+'babbab' ::: 'babbab'
+'babad' ::: 'bab'
+'a' ::: 'a'
+'ac' ::: 'a'
+'aacabdkacaa' ::: 'aca'
+'bbad' ::: 'bb'
