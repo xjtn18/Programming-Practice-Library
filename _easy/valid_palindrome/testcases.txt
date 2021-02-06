@@ -1,0 +1,8 @@
+'A man, a plan, a canal: Panama' ::: True
+'' ::: True
+'a' ::: True
+'anna' ::: True
+'ana' ::: True
+'an; a' ::: True
+'abn; a' ::: False
+'cabba' ::: False
