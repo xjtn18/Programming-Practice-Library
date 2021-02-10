@@ -66,11 +66,11 @@ class ListNode:
     def __str__(self) -> str:  # preorder print
         s = ""
         node = self
-        print("[ ", end="")
+        s += "[ "
         while node:
-            print(node.val, end=" ")
+            s += str(node.val) + " "
             node = node.next
-        print("]")
+        s+= "]"
         return s
 
 
