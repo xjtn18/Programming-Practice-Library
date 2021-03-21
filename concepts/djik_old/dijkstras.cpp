@@ -15,7 +15,7 @@ class Edge {
 public:
 	// Time Complexity = O(1)
 	Edge(int s, int d, int w)
-		: src(s), dst(d), weight(w) { }
+		: src{s}, dst{d}, weight{w} { }
 
 
 	// Time Complexity = O(1)
@@ -53,7 +53,7 @@ class Vertex {
 public:
 	// Time Complexity = O(1)
 	Vertex(int i = 0)
-		: id(i), total_weight(std::numeric_limits<int>::max()) { }
+		: id{i}, total_weight{(int)std::numeric_limits<int>::max()} { }
 	
 
 	// Time Complexity = O(1)
@@ -272,6 +272,11 @@ void dijkstras(Graph& g, int source, int* dist, int* pre){
 		pre[i] = -1;
 	}
 
+	for (int i = 0; i < numv; ++i){
+		std::cout << pre[i] << "  ";
+		std::cout << dist[i] << "  ";
+	}
+
 	dist[source] = 0; // distance to source is 0
 	Vertex start = verts[source];
 	start.setTotalWeight(0);
@@ -285,9 +290,11 @@ void dijkstras(Graph& g, int source, int* dist, int* pre){
 		if (checked.find(u) == checked.end()){ // since we are adding updated nodes to the queue rather than changing old ones
 			//checked.insert(u);
 			for (Edge e : minv.get_edges()){
+				log("yeeeee");
 				int v = e.get_dst(); // get the neighboring vertex
 				int alt = dist[u] + e.get_weight();
 				if (checked.find(v) == checked.end() && alt < dist[v]){
+					log("ummmm");
 					// if the path to v from this node is shorter than our current shortest path v, update that.
 					dist[v] = alt;
 					pre[v] = u;
@@ -332,6 +339,7 @@ int main(int argc, char* argv[]){
 	if (argc < 3) exit(-1);
 	std::string filename = argv[1];
 	int source = std::stoi(argv[2]);
+	bool undirected = argv[2];
 	Graph my_graph(filename, std::stoi(argv[3]));
 
 	// call djikstras and print result
@@ -341,6 +349,12 @@ int main(int argc, char* argv[]){
 	int *pre = new int[numv];
 
 	dijkstras(my_graph, source, dist, pre); // compute SSSP (fills dist and pre)
+
+	for (int i = 0; i < numv; ++i){
+		std::cout << pre[i] << "  ";
+		std::cout << dist[i] << "  ";
+	}
+	std::cout << "\n";
 
 	for (int i = 0; i < numv; ++i){ // prints SSSP for all possible targets
 		std::vector<int> ssp = readSSP(dist, pre, numv, source, i);

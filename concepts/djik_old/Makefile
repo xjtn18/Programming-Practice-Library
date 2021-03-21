@@ -11,5 +11,5 @@ build: dijkstras.o
 	$(CC) $< -o $(EXEC)
 
 run: build
-	@./$(EXEC) large.graph 5 0
+	@./$(EXEC) small.graph 0 0
 
