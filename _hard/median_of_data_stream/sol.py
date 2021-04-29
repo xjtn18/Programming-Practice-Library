@@ -51,7 +51,7 @@ class Solution:
         self.hi = MyHeap()
 
 
-    def addNum(self, num: int) -> None: # O(5 * log n)
+    def addNum(self, num: int) -> None: # O(3 * log n)
         self.lo.push(num)
         if len(self.lo) > len(self.hi)+1 or (len(self.hi) > 0 and self.lo.top() > self.hi.top()):
             self.hi.push(self.lo.pop())

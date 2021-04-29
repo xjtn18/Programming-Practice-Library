@@ -20,9 +20,6 @@ Idea:
 """
 
 
-
-
-
 #START
 class Solution:
     def isPalindrome(self, head : ListNode) -> bool:

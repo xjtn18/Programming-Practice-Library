@@ -1,0 +1,1 @@
+DFS is equivalent to a preorder traversal

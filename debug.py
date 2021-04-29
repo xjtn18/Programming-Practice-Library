@@ -91,8 +91,19 @@ def fill(v : [int], i : int) -> TreeNode:
 
 
 def createBinaryTree(v : [int]) -> TreeNode:
-    if len(v) == 0: return None
-    return fill(v, 0)
+	if len(v) == 0: return None
+	return fill(v, 0)
+
+
+def createLinkedList(v : [int]) -> TreeNode:
+	if len(v) == 0: return None
+	root = ListNode(v[0])
+	curr = root
+	for x in v[1:]:
+		curr.next = ListNode(x)
+		curr = curr.next
+	return root
+
 
 
 

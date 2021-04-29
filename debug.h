@@ -2,7 +2,7 @@
 //  Author: Jacob Nardone
 //  Date created: 6/17/2020
 //  File type: C++ header file
-//  Description: Helper functions I made to debug/log (print) objects, strings, etc. and to create/initialize common data structures. This helps especially when creating test cases.
+//  Description: Helper functions I made to debug/dlog (print) objects, strings, etc. and to create/initialize common data structures. This helps especially when creating test cases.
 //////////////////////////////////////////////////////
 
 #pragma once
@@ -14,7 +14,7 @@
 #include <cmath>
 #include <sstream>
 
-#define kDEBUG 1 // set this to 0 if you dont want to see any of your logs
+#define kDEBUG 1 // set this to 0 if you dont want to see any of your dlogs
 
 
 ////////////////////////////////////////
@@ -31,7 +31,7 @@ void buffer(T input){
 
 // this template prints anything (singular value)
 template <typename T>
-void log(T x, bool nl = true, unsigned int sleeptime = 0){
+void dlog(T x, bool nl = true, unsigned int sleeptime = 0){
 	if (!kDEBUG)
 		return;
 	std::cout << x;
@@ -43,23 +43,25 @@ void log(T x, bool nl = true, unsigned int sleeptime = 0){
 
 // this template prints arrays
 template <typename T>
-void log(T* x, int len){
+void dlog(T* x, int len){
 	for (int y = 0; y < len; y++){
-		log(x[y], false);
+		dlog(x[y], false);
 		if (y != len-1){
-			log(", ", false);
+			dlog(", ", false);
 		}
 	}
-	log("");
+	dlog("");
 
 }
 
+
+
 // this template prints vectors
 template <typename T>
-void log(std::vector<T> v, bool nl = true){
+void dlog(std::vector<T> v, bool nl = true){
 	std::cout << '[';
 	for (int i = 0; i < v.size(); ++i){
-		log (v[i], false);
+		dlog (v[i], false);
 		if (i != v.size()-1)
 			std::cout << ", ";
 	}
@@ -103,7 +105,7 @@ ListNode* createLL(std::vector<T> v){
 
 
 // Print a Linked List
-void log(ListNode* head){
+void dlog(ListNode* head){
 	if (!head){
 		std::cout << "Empty" << std::endl;
 		return;
@@ -167,7 +169,7 @@ TreeNode* createBinaryTree(std::string vstr){
 	while (getline(ss,numstr,',')){
 		v.push_back(numstr);
 	}
-	log(v);
+	dlog(v);
 
 	TreeNode* head = new TreeNode(stoi(v[0]));
 	fill(head, v, 0);

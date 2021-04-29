@@ -20,7 +20,7 @@ Idea:
 
     Complexity:
         Time:   O(N)
-        Space:  O(N)
+        Space:  O(1)
 """
 
 

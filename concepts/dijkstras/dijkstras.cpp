@@ -184,84 +184,11 @@ public:
 
 
 
-template <typename C>
-class MutablePQ {
-
-	std::vector<Vertex> vec;
-	int size;
-	C comparator;
-
-	/*
-	void siftUp(int index){
-		while (index > 0){
-			int parent = (index - 1) / 2; // int vars always rounds down, so this is safe.
-			if (this->comparator(vec[parent].getTotalWeight(), vec[index].getTotalWeight())){
-				std::swap(vec[index], vec[parent]);
-				std::swap(index, parent);
-			} else { // we dont need to sift up anymore
-				break;
-			}
-		}
-	}
-	*/
-
-
-
-public:
-	
-	MutablePQ() : size(0) {}
-
-	void push(const Vertex vtex){
-		vec.push_back(vtex);
-		std::push_heap(vec.begin(), vec.end(), this->comparator); // O(log n)
-		size++;
-	}
-
-	const Vertex& top() const {
-		return vec[0];
-	}
-
-	Vertex pop(){
-		Vertex ret = vec[0]; // min element
-		std::pop_heap(vec.begin(), vec.end(), this->comparator); // moves max to bottom and keeps heap invariant
-		vec.pop_back(); // actually removes the max, which was just pushed to the back
-		size--;
-		return ret;
-	}
-
-	
-	/*
-	void update(int key, int newVal){
-		int index = find(key);
-		if (index == -1){
-			return;
-		}
-		vec[index].setTotalWeight(newVal);
-		siftUp(index);
-	}
-	*/
-
-	bool empty() const {
-		return vec.empty();
-	}
-
-
-	void print() const {
-		for (const Vertex& v : vec){
-			std::cout << v.getID() << " ";
-		}
-		std::cout << "\n";
-	}
-
-};
-
-
-
 
 
 
 void dijkstras(Graph& g, int source, int* dist, int* pre){
-	MutablePQ<std::greater<>> PQ; // greater as the comparator actually means this is a MIN HEAP.
+	std::priority_queue<Vertex, std::vector<Vertex>, std::greater<Vertex> > PQ;
 	std::unordered_set<int> checked;
 	int numv = g.getNumVertex();
 	const Vertex *verts = g.getVertices();
@@ -278,9 +205,9 @@ void dijkstras(Graph& g, int source, int* dist, int* pre){
 	PQ.push(start);
 
 
-	// main loop
 	while (!PQ.empty()){
-		Vertex minv = PQ.pop();
+		Vertex minv = PQ.top();
+		PQ.pop();
 		int u = minv.getID();
 		if (checked.find(u) == checked.end()){ // since we are adding updated nodes to the queue rather than changing old ones
 			//checked.insert(u);
@@ -299,7 +226,10 @@ void dijkstras(Graph& g, int source, int* dist, int* pre){
 										// without some kind of map to the index) and manually calling sift up.
 										// Adding a duplicate to the PQ does not break the alg.
 										// Just make sure to skip the old nodes by keeping the keys in a set for constant 'find' time.
-					Vertex updated(verts[v]);
+										// No need for a mutable priority Queue (which would be a worse time complexity), can just 
+										// use std::priority_queue.
+
+					Vertex updated(verts[v]); // make a copy of the vertex
 					updated.setTotalWeight(alt);
 					PQ.push(updated);
 				}
@@ -311,6 +241,7 @@ void dijkstras(Graph& g, int source, int* dist, int* pre){
 
 
 std::vector<int> readSSP(int *dist, int *pre, int numv, int source, int target){
+	// read the single source shortest path
 	std::vector<int> pth;
 	int i = target;
 	while (i != source){
@@ -327,7 +258,7 @@ std::vector<int> readSSP(int *dist, int *pre, int numv, int source, int target){
 
 
 
-// Time Complexity = O((|E| + |V|) log |V|)
+// Time Complexity = O((|E| + |V|) dlog |V|)
 int main(int argc, char* argv[]){
 	if (argc < 3) exit(-1);
 	std::string filename = argv[1];
@@ -345,13 +276,13 @@ int main(int argc, char* argv[]){
 	for (int i = 0; i < numv; ++i){ // prints SSSP for all possible targets
 		std::vector<int> ssp = readSSP(dist, pre, numv, source, i);
 		std::cout << i << " -> ";
-		log(ssp, false);
+		dlog(ssp, false);
 		if (!ssp.empty()){
-			log(" (" + std::to_string(dist[i]) + ")");
+			dlog(" (" + std::to_string(dist[i]) + ")");
 		} else {
-			log(" (no path)");
+			dlog(" (no path)");
 		}
-		log("");
+		dlog("");
 	}
 
 
