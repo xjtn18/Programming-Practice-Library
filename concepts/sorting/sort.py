@@ -58,3 +58,5 @@ print(selectionsort(t))
 
 t = [6,5,5,1,2,3,8,11,0]
 print(insertionsort(t))
+
+

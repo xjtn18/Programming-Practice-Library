@@ -13,7 +13,7 @@ class MyHeap:
     def top(self) -> int:
         if len(self.heap) == 0:
             return None
-            
+
         return self._checkFlip() * self.heap[0]
 
     def pop(self) -> int:

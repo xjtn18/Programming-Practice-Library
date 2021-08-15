@@ -1,0 +1,6 @@
+121 ::: True
+-121 ::: False
+4 ::: True
+0 ::: True
+5115 ::: True
+51155 ::: False

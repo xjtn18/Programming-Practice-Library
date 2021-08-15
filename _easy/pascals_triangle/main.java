@@ -45,3 +45,4 @@ class main {
 		System.out.println(sol.generate(0));
 	}
 }
+

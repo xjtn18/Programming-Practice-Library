@@ -27,6 +27,7 @@ elif [ $lang = "cpp" ];
 then
 	mkdir $dir
 	cp templates/cpp_template.txt $dir/main.cpp
+	cp templates/Makefile $dir
 	printf "Created \'$pname\' cpp directory.\n"
 
 elif [ $lang = "java" ];

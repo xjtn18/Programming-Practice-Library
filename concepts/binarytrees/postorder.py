@@ -6,7 +6,7 @@ def postorder(root : TreeNode) -> [int]:
 	ordering = []
 	stk = [root]
 	explored = set([None]) # add None to explored to skip having to check for leaves
-	
+
 	while stk:
 		node = stk[-1] # top of the stack
 		if node.left in explored and node.right in explored:
@@ -36,7 +36,7 @@ def postorder2(root : TreeNode) -> [int]:
 	##############
 	stk1 = [root]
 	stk2 = []
-	
+
 	while stk1:
 		node = stk1.pop()
 		stk2.append(node)

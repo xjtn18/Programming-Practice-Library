@@ -6,10 +6,9 @@
 //////////////////////////////////////////////////////
 
 
-#include <iostream>
-#include "../debug.h"
-
+#include <mystd.h>
 using namespace std;
+
 
 
 

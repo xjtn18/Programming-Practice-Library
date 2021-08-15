@@ -1,1 +1,2 @@
 DFS is equivalent to a preorder traversal
+Binary tree is an UNSORTED binary search tree

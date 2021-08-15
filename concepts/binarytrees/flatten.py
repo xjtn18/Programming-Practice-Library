@@ -20,7 +20,6 @@ def flatten(node : TreeNode) -> TreeNode:
 		curr.right = node.right
 		node.left = None
 		node.right = leftroot
-	
 
 
 t = createBinaryTree([1,2,5,3,4,None,6])
