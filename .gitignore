@@ -3,3 +3,4 @@
 *.stackdump
 __pycache__/
 tags
+**/Makefile*
