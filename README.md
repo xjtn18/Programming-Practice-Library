@@ -11,7 +11,7 @@
 	* MSW 	>> "new.sh {problem_name} {language} {difficulty}"
 - Languages to choose from include "python", "java", and "cpp".
 - Difficulties to choose from include "easy", "medium", and "hard".
-- This script will create a problem directory in in the specified difficulty folder, copy over the neccessary template files, and then set that directory the current working one.
+- This script will create a problem directory in in the specified difficulty folder, copy over the neccessary template files, and then set that directory to the current working one.
 
 - Any python testcases should be written in the testcases.txt file in the format 'input ::: expected output'.
 - Running the sol.py in python problem directories will test your code against the testcases and show you which cases you passed/failed.
