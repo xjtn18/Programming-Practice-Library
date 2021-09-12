@@ -40,3 +40,4 @@ for x in range(len(tcs)):
     outcome = 'pass' if output == exps[x] else 'FAIL'
     print(inp, '-->', output, ':::', exps[x], '[' + str(outcome) + ']')
 print("")
+

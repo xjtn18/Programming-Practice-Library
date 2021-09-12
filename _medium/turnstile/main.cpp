@@ -7,10 +7,9 @@
 
 
 #include <iostream>
-#include <list>
-#include <Debug.hpp>
-
-using namespace std;
+#include <queue>
+#include <mystd.h>
+#include <runner.hpp>
 
 
 
@@ -26,7 +25,7 @@ using namespace std;
 
 std::vector<int> single_door(std::vector<int> arrival_times, std::vector<int> directions){
 	int n = arrival_times.size();
-	std::list<int> enter_q, exit_q;
+	std::queue<int> enter_q, exit_q;
 	std::vector<int> res(n, -1);
 	int latest_use_time = -1;
 	
@@ -40,7 +39,7 @@ std::vector<int> single_door(std::vector<int> arrival_times, std::vector<int> di
 		for (auto q : {priority, secondary}){ // O(2)
 			while (!q->empty()){ // O(n) with the n dispersed evenly, leaving total algorithm running time as 2n.
 				int pid = q->front();
-				q->pop_front();
+				q->pop();
 				res[pid] = std::max(arrival_times[pid], latest_use_time + 1);
 				latest_use_time = std::max(res[pid], latest_use_time);
 			}
@@ -56,9 +55,9 @@ std::vector<int> single_door(std::vector<int> arrival_times, std::vector<int> di
 
 		// populate the queues
 		if (directions[i] == 0){
-			enter_q.push_back(i);
+			enter_q.push(i);
 		} else {
-			exit_q.push_back(i);
+			exit_q.push(i);
 		}
 	}
 	pop_queues(j);
@@ -68,7 +67,8 @@ std::vector<int> single_door(std::vector<int> arrival_times, std::vector<int> di
 
 
 int main(){
-	dlog(single_door({0,0,0,0,0,0,3}, {0,0,0,0,1,1,0})); // expecting [0,2,1,3]
+	//c_log(single_door({0,0,0,0,0,0,3}, {0,0,0,0,1,1,0}));
+	run_tests<std::vector<int>(std::vector<int>, std::vector<int>)>(single_door);
 	return 0;
 }
 
