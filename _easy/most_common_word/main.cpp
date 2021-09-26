@@ -7,7 +7,7 @@
 //////////////////////////////////////////////////////
 
 
-
+//
 // Solution:
 // Use 2 pointers to tokenize the 'paragraph' string.
 // Extract the tokens using substr and store a count of the non-banned words in a map.
@@ -21,6 +21,10 @@
 // Could use a hash map instead of a tree map for constant map lookup.
 //	So worst case for this solution is O(n*m) where 'n' is # of chars in paragraph, and 'm' is avg # of chars per
 //	word (for setting to lowercase); NOTE: 'm' is going to be very small if the paragraph contains valid language words.
+//
+// SC:
+// O( |banned| + |words in paragraph| )
+// Allocating space for the count map and the banned set.
 //
 
 
