@@ -18,8 +18,6 @@ vector<int> lowlink;
 
 vector<vector<int>> answer;
 
-
-
 void tarjan(int v, int predecessor = -1){
 	static int index = 0;
 
@@ -98,10 +96,8 @@ int main(){
 	connections = {{0,1}, {1,2}, {2,0}};
 	hlog(criticalConnections(n, connections));
 
-	dlog("here");
 	connections = {{1,0},{0,2},{2,1},{1,3},{3,4},{4,5},{5,3}};
 	hlog(criticalConnections(6, connections));
-
 
 	return 0;
 }

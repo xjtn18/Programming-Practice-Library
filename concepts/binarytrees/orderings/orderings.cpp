@@ -2,7 +2,7 @@
 //  Author: Jacob Nardone
 //  Date created:
 //  File type: C++ source file
-//  Description:
+//  Description: The recursive and iterative solutions to the 3 ordered traversals of binary tree.
 //////////////////////////////////////////////////////
 
 
@@ -10,8 +10,6 @@
 #include <unordered_set>
 #include <stack>
 #include <cassert>
-
-
 
 
 
@@ -140,6 +138,7 @@ void test_correctness(TreeNode *root){
 	assert(recursive_ordering<int>(root, PREORDER) == iterative_preorder<int>(root));
 	assert(recursive_ordering<int>(root, INORDER) == iterative_inorder<int>(root));
 	assert(recursive_ordering<int>(root, POSTORDER) == iterative_postorder<int>(root));
+	dlog("All procedures successful.");
 }
 
 

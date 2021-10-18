@@ -2,7 +2,8 @@
 //  Author: Jacob Nardone
 //  Date created: 6/17/2020
 //  File type: C++ header file
-//  Description: Helper functions I made to debug/print objects, strings, etc. and to create/initialize common data structures. This helps especially when creating test cases.
+//  Description: Helper functions I made to debug/print objects, strings, etc. 
+//  			and to create/initialize common data structures.
 //////////////////////////////////////////////////////
 
 #pragma once
@@ -28,8 +29,20 @@
 #define is_in(x,y)   y.find(x) != y.end()
 #define not_in(x,y)  y.find(x) == y.end()
 
+
+void say_all(){ std::cout << "\n"; }
+
+template<typename Head, typename... Tail>
+void say_all(Head H, Tail... T){
+	std::cout << " " << H;
+	say_all(T...);
+}
+#define say(...) std::cout << "(" << #__VA_ARGS__ << ") =\t", say_all(__VA_ARGS__)
+
+
+
 ////////////////////////////////////////
-// Log functions
+// Logging functions
 ////////////////////////////////////////
 
 template <typename T>
@@ -84,7 +97,7 @@ bool is_last(Iter iter, const Container& cont){
 
 // this template prints any standard container
 template <typename Container>
-void c_log(Container &l, bool nl = true){
+void c_log(Container l, bool nl = true){
 	std::cout << '[';
 	for (auto iter = l.begin(); iter != l.end(); ++iter){
 		dlog (*iter, false);
@@ -126,7 +139,6 @@ std::vector<std::pair<T1, T2>> sorted_by_value(const std::map<T1, T2> m){
 }
 
 
-
 // this template prints 2d containers
 template <typename Container>
 void hlog(Container mat, bool nl = true){
@@ -134,7 +146,10 @@ void hlog(Container mat, bool nl = true){
 		std::cout << '[';
 		for (auto& value : subcontainer){
 			//std::cout << std::setw(4) << value;
-			dlog(value, false);
+			if (value == INT_MAX)
+				dlog("#", false);
+			else
+				dlog(value, false);
 			dlog("  ", false);
 			//std::cout << std::setw(6) << std::endl;
 		}

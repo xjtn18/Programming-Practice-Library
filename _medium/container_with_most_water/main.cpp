@@ -30,7 +30,6 @@ int maxArea(vector<int>& height){
 
 
 
-
 int main(){
 	vector<int> input;
 

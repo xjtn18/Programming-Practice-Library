@@ -15,8 +15,7 @@ fi
 mkdir $dir
 
 if [ $lang = "cpp" ]; then
-	cp templates/cpp_template.txt $dir/main.cpp
-	cp templates/makefile_template.txt $dir/Makefile
+	cp -r templates/cpp/* $dir/
 	printf "Created C++ problem at $dir\n"
 	sleep 1
 	cd $dir

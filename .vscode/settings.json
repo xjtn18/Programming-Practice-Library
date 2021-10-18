@@ -1,0 +1,10 @@
+{
+    "C_Cpp.errorSquiggles": "Disabled",
+    "files.associations": {
+        "iosfwd": "cpp",
+        "utility": "cpp",
+        "vector": "cpp",
+        "queue": "cpp",
+        "type_traits": "cpp"
+    }
+}
