@@ -78,7 +78,6 @@ public:
 	}
 
 
-
 	bool search(string s){
 		if (!root) return false;
 		Node *curr = root;
@@ -101,29 +100,24 @@ public:
 		Node *curr = root;
 
 		while (curr){
-			bool exit_flag = false;
-			size_t i;
+			if (prefix.size() > curr->val.size()){ // impossible that they could match
+				curr = curr->right;
+			}
 
+			size_t i;
 			for (i = 0; i < prefix.size() && i < curr->val.size(); ++i){
 				if (prefix[i] < curr->val[i]){
 					curr = curr->left;
-					exit_flag = true;
 					break;
 				} else if (prefix[i] > curr->val[i]){
 					curr = curr->right;
-					exit_flag = true;
 					break;
 				}
 			}
 
-			if (!exit_flag){
-				if (i != prefix.size()){
-					curr = curr->right;
-				} else {
-					return true;
-				}
+			if (i == prefix.size()){
+				return true;
 			}
-
 		}
 
 		return false;
@@ -136,10 +130,16 @@ public:
 
 int main(){
 	Trie t;
+	t.insert("cheese");
 	t.insert("apple");
-	t.search("app");
-	t.startsWith("app");
-	
+
+	assert( t.startsWith("app") == 1 );
+	assert( t.startsWith("cheese") == 1 );
+	assert( t.startsWith("apple") == 1 );
+	assert( t.search("app") == 0 );
+	assert( t.search("cheese") == 1 );
+	assert( t.startsWith("c") == 1 );
+	assert( t.startsWith("cheez") == 0 );
 
 	return 0;
 }

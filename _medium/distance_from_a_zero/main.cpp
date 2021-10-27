@@ -62,7 +62,7 @@ vector<vector<int>> updateMatrix(vector<vector<int>>& mat) {
 					// you would miss paths to closest zeroes that fall on the opposite
 					// axis (i.e. the SW + NE axis). One way to fix that problem is to use
 					// 4 whole seperate matrices for each direction, but TC and SC suffers.
-					// This can be done with linear SC and 2(m*n) TC like so.
+					// However, this can be done with linear SC and 2(m*n) TC like so.
 			}
 		}
 	}
