@@ -30,6 +30,15 @@
 #define not_in(x,y)  y.find(x) == y.end()
 
 
+inline void breakpoint(){
+	static int id = 1;
+	std::cout << "--> Breakpoint " << id << std::endl;
+	id++;
+}
+
+#define BP breakpoint();
+
+
 void say_all(){ std::cout << "\n"; }
 
 template<typename Head, typename... Tail>
