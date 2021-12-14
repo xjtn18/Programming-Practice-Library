@@ -1,11 +1,4 @@
-#include <Debug.hpp>
-#include <unordered_set>
-#include <queue>
-#include <fstream>
-#include <limits>
-#include <algorithm>
-#include <functional>
-#include <sstream>
+#include <mystd.h>
 
 
 class Edge {
@@ -54,7 +47,7 @@ class Vertex {
 public:
 	// Time Complexity = O(1)
 	Vertex(int i = 0)
-		: id(i), total_weight(std::numeric_limits<int>::max()) { }
+		: id(i), total_weight(INT_MAX) { }
 	
 
 	// Time Complexity = O(1)
@@ -187,53 +180,36 @@ public:
 
 
 
-
 void dijkstras(Graph& g, int source, int* dist, int* pre){
 	std::priority_queue<Vertex, std::vector<Vertex>, std::greater<Vertex> > PQ;
-	std::unordered_set<int> checked;
-	int numv = g.getNumVertex();
+	std::unordered_set<int> visited;
 	Vertex *verts = g.getVertices();
 
 	// Initialization
-	for (int i = 0; i < numv; ++i){
-		dist[i] = std::numeric_limits<int>::max();
+	for (int i = 0; i < g.getNumVertex(); ++i){
+		dist[i] = INT_MAX;
 		pre[i] = -1;
 	}
 
 	dist[source] = 0; // distance to source is 0
-	Vertex &start = verts[source];
-	start.setTotalWeight(0);
-	PQ.push(start);
+	verts[source].setTotalWeight(0);
+	PQ.push(verts[source]);
 
 
 	while (!PQ.empty()){
 		Vertex minv = PQ.top();
 		PQ.pop();
 		int u = minv.getID();
-		if (checked.find(u) == checked.end()){ // since we are adding updated nodes to the queue rather than changing old ones
-			checked.insert(u);
-			for (Edge e : minv.get_edges()){
-				int v = e.get_dst(); // get the neighboring vertex
-				int alt = dist[u] + e.get_weight();
-				if (checked.find(v) == checked.end() && alt < dist[v]){
-					// if the path to v from this node is shorter than our current shortest path v, update that.
-					dist[v] = alt;
-					pre[v] = u;
-					//PQ.update(v, alt); // v's shortest weight (total_weight) has changed, 
-						// so we need to sift it to the correct position in the PQ.
-						// UPDATE: You dont need this update function. If you can make a copy of the node,
-						// you can just add that vertex back to the priority queue. This prevents having
-						// to search for the key in the priority queue (which would take linear time
-						// without some kind of map to the index) and manually calling sift up.
-						// Adding a duplicate to the PQ does not break the alg.
-						// Just make sure to skip the old nodes by keeping the keys in a set for constant 'find' time.
-						// No need for a mutable priority Queue (which would be a worse time complexity), can just 
-						// use std::priority_queue.
-
-					Vertex updated(verts[v]); // make a copy of the vertex
-					updated.setTotalWeight(alt);
-					PQ.push(updated);
-				}
+		if (visited.count(u)) continue; // a single node may have multiple entries in the pq.
+		visited.insert(u);
+		for (Edge e : minv.get_edges()){
+			int v = e.get_dst(); // get the neighboring vertex.
+			int alt = dist[u] + e.get_weight();
+			if (!visited.count(v) && alt < dist[v]){
+				dist[v] = alt;
+				pre[v] = u;
+				verts[v].setTotalWeight(alt);
+				PQ.push(verts[v]);
 			}
 		}
 	}
@@ -277,7 +253,7 @@ int main(int argc, char* argv[]){
 	for (int i = 0; i < numv; ++i){ // prints SSSP for all possible targets
 		std::vector<int> ssp = readSSP(dist, pre, numv, source, i);
 		std::cout << i << " -> ";
-		dlog(ssp, false);
+		c_log(ssp, false);
 		if (!ssp.empty()){
 			dlog(" (" + std::to_string(dist[i]) + ")");
 		} else {

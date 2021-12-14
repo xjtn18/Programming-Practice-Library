@@ -7,18 +7,7 @@
 //////////////////////////////////////////////////////
 
 #pragma once
-#include <unistd.h>
-#include <iostream>
-#include <iomanip>
-#include <vector>
-#include <list>
-#include <map>
-#include <set>
-#include <queue>
-#include <stack>
-#include <unordered_set>
-#include <unordered_map>
-
+#include <bits/stdc++.h>
 #include <Timer.h>
 
 

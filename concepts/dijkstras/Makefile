@@ -20,7 +20,7 @@ EXEC 		:= out
 CC			:= g++
 # compilation flags
 CFLAGS	:= -std=c++17 -Wc++17-extensions -Wall \
-				-I$(INCDIR) -I/Users/Jacob/dev/LeetCodeSolutions
+				-I$(INCDIR) -I/Users/Jacob/dev/LeetCodeSolutions/mystd
 # linking flags (libraries)
 LFLAGS	:=
 #----------------------------------------------------------------#

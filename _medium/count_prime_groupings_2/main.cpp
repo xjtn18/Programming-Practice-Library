@@ -31,9 +31,14 @@ bool is_prime(string n_str){
 
 
 int count_prime_groups(string s){
-	// Count the number of unique groupings of a number s such that each group represents a prime number, leaving order the same.
+	// Count the number of unique groupings of a
+	// number s such that each group represents a prime number, leaving order the same.
 	// This function uses DP:
-	// Assume for a string of length N, we have a value P that stores the correct number of prime groupings of substring s(0, N-1). Then this means our answer to the number of prime groupings in the total string 
+	// Assume for a string of length N, we have a value P 
+	// that stores the correct number of prime groupings 
+	// of substring s(0, N-1). Then this means our answer 
+	// to the number of prime groupings in the total string.
+	
 	int n = s.length();
 	if (n==0) return 0;
 	vector<int> memo(n, 0); // memo[i] represents the number of prime groupings in the substring s[0] to s[i];
