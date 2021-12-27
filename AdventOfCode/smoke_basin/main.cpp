@@ -50,7 +50,7 @@ vector<pair<int,int>> get_lows(Matrix<int> &mat){
 
 
 
-int dfs(vector<vector<int>> &mat, int i, int j){
+int dfs(Matrix<int> &mat, int i, int j){
 	int m = mat.size();
 	int n = mat[0].size();
 	static auto in_bounds = [&](int x, int y){
@@ -73,7 +73,7 @@ int dfs(vector<vector<int>> &mat, int i, int j){
 }
 
 
-vector<int> get_basins(vector<pair<int,int>> &lows, vector<vector<int>> &mat){
+vector<int> get_basins(vector<pair<int,int>> &lows, Matrix<int> &mat){
 	vector<int> basins;
 	basins.reserve(lows.size());
 
