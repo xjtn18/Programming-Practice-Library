@@ -28,7 +28,7 @@ inline void breakpoint(){
 #define BP breakpoint();
 
 
-void say_all(){ std::cout << "\n"; }
+inline void say_all(){ std::cout << "\n"; }
 
 template<typename Head, typename... Tail>
 void say_all(Head H, Tail... T){
@@ -289,29 +289,10 @@ template <typename T>
 using vec2D = std::vector<std::vector<T>>;  // typedef
 
 
-//get2D("1 2 3|4 5 6|7 8 9")    <-- what we want
 
-/*
-template <typename T>
-vec2D<char> get2D(std::string vstr){
-	int row = 0, col = 0;
-	vec2D<char> mat = {{}};
-
-	for (int i = 0; i < vstr.size(); ++i){
-		char c = s[i];
-		if (c == ' '){
-			col++;
-		} else if (c == '|'){
-			row++;
-		} else {
-			mat[row][col] = c;
-		}
-	}
-	return mat;
-}
-*/
-
-
+// Random
+std::vector<int> irandarray(const size_t len, const int x, const int y);
+vec2D<int> irandmatrix(const size_t m, const size_t n, const int x, const int y);
 
 
 

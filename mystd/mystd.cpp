@@ -80,11 +80,37 @@ void print2DUtil(TreeNode *root, int space){
 
 // Wrapper over print2DUtil()
 void dlog(TreeNode* root){
-    // Pass initial space count as 0
 	dlog("\n-----------------------------------------------------", false);
     print2DUtil(root, 0);
 	dlog("-----------------------------------------------------\n");
 }
+
+
+
+// Random arrays/matrices
+
+std::vector<int> irandarray(const size_t len, const int x, const int y){
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<int> dist(x,y);
+	
+	std::vector<int> a(len);
+	for (int i = 0; i < len; ++i){
+		a[i] = dist(gen);
+	}
+
+	return a;
+};
+
+vec2D<int> irandmatrix(const size_t m, const size_t n, const int x, const int y){
+	vec2D<int> mat;
+	mat.reserve(m);
+	for (int i = 0; i < m; ++i){
+		mat.push_back(move(irandarray(n, x, y)));
+	}
+
+	return mat;
+};
 
 
 
