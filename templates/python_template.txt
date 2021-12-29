@@ -11,10 +11,8 @@ from parseTC import *
 from debug import *
 
 
-#START
 class Solution:
 	def ___(self):
-#END
 
 
 print('\n### TESTCASES ###')

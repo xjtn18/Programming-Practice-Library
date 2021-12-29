@@ -31,7 +31,7 @@ if [ $lang = "python" ]; then
 fi
 
 if [ $lang = "java" ]; then
-	cp templates/java_template.txt $dir/main.java
+	cp -r templates/java/* $dir/
 	printf "Created Java problem at $dir\n"
 	sleep 1
 	cd $dir
