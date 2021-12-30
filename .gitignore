@@ -6,5 +6,8 @@ tags
 _easy/**/Makefile*
 _medium/**/Makefile*
 _hard/**/Makefile*
+_easy/**/Solution.class*
+_medium/**/Solution.class*
+_hard/**/Solution.class*
 notes
 mocks/

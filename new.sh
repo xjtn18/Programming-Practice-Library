@@ -5,14 +5,18 @@ name=$1
 lang=$2
 diff=$3
 
-dir="_$diff/$name"
+if [ $lang = "sql" ]; then
+	dir="_$diff/SQL/"
+else
+	dir="_$diff/$name"
+	if [ -d $dir ]; then
+		printf "Problem with this name already exists.\n"
+		return 1
+	fi
 
-if [ -d $dir ]; then
-	printf "Problem with this name already exists.\n"
-	return 1
+	mkdir $dir
 fi
 
-mkdir $dir
 
 if [ $lang = "cpp" ]; then
 	cp -r templates/cpp/* $dir/
@@ -33,6 +37,14 @@ fi
 if [ $lang = "java" ]; then
 	cp -r templates/java/* $dir/
 	printf "Created Java problem at $dir\n"
+	sleep 1
+	cd $dir
+	return 0
+fi
+
+if [ $lang = "sql" ]; then
+	touch $dir/$name.sql
+	printf "Created SQL problem at $dir\n"
 	sleep 1
 	cd $dir
 	return 0
