@@ -3,6 +3,8 @@
 *.stackdump
 __pycache__/
 tags
-**/Makefile*
+_easy/**/Makefile*
+_medium/**/Makefile*
+_hard/**/Makefile*
 notes
 mocks/
