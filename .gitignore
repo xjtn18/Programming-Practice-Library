@@ -12,5 +12,5 @@ _hard/**/Solution.class*
 notes
 mocks/
 *.iml
-*.
+.*
 !.gitignore
