@@ -11,3 +11,6 @@ _medium/**/Solution.class*
 _hard/**/Solution.class*
 notes
 mocks/
+*.iml
+*.
+!.gitignore
