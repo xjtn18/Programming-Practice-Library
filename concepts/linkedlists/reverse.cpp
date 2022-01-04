@@ -3,23 +3,21 @@
 // uses 2 pointers only to reverse a linked list in place
 
 
-ListNode* reverse_2ptr(ListNode *head){
-	ListNode *next, *prev = nullptr;
+void reverse_2ptr(ListNode<int> *&head){
+	ListNode<int> *prev = nullptr;
 
 	while (head != nullptr){
-		next = head->next;
-		head->next = prev;
-		prev = head;
-		head = next;
-
+		prev = exchange(head, exchange(head->next, prev));
 	}
-	return prev;
+	head = prev;
 }
 
 
 
 int main(void){
-	dlog(reverse_2ptr(createLL({1,2,3,4,5,6})));
+	ListNode<int> *ll = createLL({1,2,3,4,5,6});
+	reverse_2ptr(ll);
+	dlog(ll);
 
 	return 0;
 }

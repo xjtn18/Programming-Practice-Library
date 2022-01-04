@@ -2,7 +2,8 @@
 //	Author: Jacob Nardone
 //	Date created: 11/17/21
 //	File type: C++ source file
-//	Description:
+//	Description: Given a 2D array of portals and walls, find the distance of
+//                  the shortest path from 'start' position to 'goal' position.
 //////////////////////////////////////////////////////
 
 

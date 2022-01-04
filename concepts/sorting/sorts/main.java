@@ -22,6 +22,11 @@ class Solution {
 
 
 	public static <T extends Comparable<T>> void bubbleSort(T[] arr){
+		// What bubble sort wants to do is take the next largest element
+		// and swap it down to the end of the list. If we do this N-1 times,
+		// we are gauranteed to have a sorted list. We can cut the main outer
+		// loop short if we dont find an element that is greater than the 
+		// following element, hence the use of the 'done' boolean.
 		int n = arr.length;
 		boolean done = false;
 
@@ -42,7 +47,7 @@ class Solution {
 
 	public static void main(String args[]){
 		// random unsorted array of integers
-		Integer[] arr = new Integer[]{4,1,5,3,4,19,3,20,3,7};
+		Integer[] arr = new Integer[]{7,4,3,5,2};
 
 		bubbleSort(arr);
 		alog(arr);
