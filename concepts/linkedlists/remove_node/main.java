@@ -35,7 +35,6 @@ class Node {
 	}
 
 	void print(){
-		if (this == null){ System.out.println("[]"); return; }
 		Node node = this;
 		System.out.printf("[%d", node.val);
 		node = node.next;
@@ -43,7 +42,7 @@ class Node {
 			System.out.printf(", %d", node.val);
 			node = node.next;
 		}
-		System.out.printf("]\n");
+		System.out.print("]\n");
 	}
 
 	void remove(Node node){
@@ -56,11 +55,10 @@ class Node {
 		}
 	}
 
-	static void removeAll(Node head, int val){
+	static Node removeAll(Node head, int val){
 		Node dummy = new Node(0);
 		dummy.next = head;
 		Node i = dummy;
-		if (i.next.val == val) i.remove(i.next); // for case when the head of the list is to be removed
 
 		while (i != null){
 			Node j = i.next;
@@ -68,6 +66,8 @@ class Node {
 			i.next = j;
 			i = i.next;
 		}
+		head = dummy.next;
+		return head;
 	}
 
 	// TAKEAWAY: In java, arguments are as a "reference, by value". This means that any operations we
@@ -81,13 +81,16 @@ class Node {
 	// that node with the node after it. NOTE: This method does not work if we want to remove the last node,
 	// because what would we be swapping the value with? At this point we would need to set the node to null,
 	// which will not refelct in the calling environment.
+	//
 	// There are two workarounds to this:
+	//
 	// A: You can create another wrapper class called "LinkedList"
 	// that stores the head node. Say you have an instance of LinkedList called 'L'. Calling L.removeAll()
 	// will also remove the head node (if its to be removed) because we'd be reassigning the L.head member.
-	// B: The other approach is to instead write a function that returns a new list of nodes, in which
-	// case we dont have to worry about modifying the incoming linked list in place, but this sacrificed
-	// space complexity.
+	//
+	// B: The other approach is to instead write a function that returns a node, the node whos address points
+	// to the new head of the list. Only downfall to this is that you have to remember the messy assignment
+	// syntax when calling the method from the calling environment.
 
 }
 
@@ -106,8 +109,8 @@ class Solution {
 		//Node n = Node.buildList("7,1,7,6,3,7,7,4");
 		Node n = Node.buildList("7,1,7,7,7,5,2,6,2,7");
 		n.print();
-		Node.removeAll(n, 7);
-		Node.removeAll(n, 2);
+		n = Node.removeAll(n, 7);
+		n = Node.removeAll(n, 2);
 		n.print();
 	}
 

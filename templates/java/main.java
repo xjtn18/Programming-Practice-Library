@@ -4,9 +4,8 @@
 //  File type: Java source file
 //  Description:
 //////////////////////////////////////////////////////
-
 import java.util.Arrays;
-
+import myjava.*;
 
 
 class Solution {
@@ -18,7 +17,7 @@ class Solution {
 
 
 
-	public static void main(String args[]){
+	public static void main(String[] args){
 
 	}
 
