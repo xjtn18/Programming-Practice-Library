@@ -1,0 +1,15 @@
+7
+1 ham
+0
+1 cheese
+1 ham
+1 cheese
+1 ham
+2 ham olives
+0
+1 cheese
+1 olives
+1 cheese
+1 olives
+1 olives
+0

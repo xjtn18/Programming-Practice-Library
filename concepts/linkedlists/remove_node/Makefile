@@ -8,13 +8,17 @@
 
 Solution.class: main.java
 	@echo Building class files...
-	@javac main.java
+	@javac \
+		-d /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes \
+		main.java \
+		/Users/Jacob/dev/Programming-Practice-Library/myjavapkg/myjava/LinkNode.java
+	@printf "Done!\n\n"
 
 run: Solution.class
-	@java Solution
+	@java -cp /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes Solution
 
 runonly:
-	@java Solution
+	@java -cp /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes Solution
 
 clean:
 	rm -rf Solution.class

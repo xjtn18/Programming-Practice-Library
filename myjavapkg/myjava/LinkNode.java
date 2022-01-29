@@ -2,8 +2,8 @@ package myjava;
 
 public class LinkNode {
 
-    int val;
-    LinkNode next;
+    public int val;
+    public LinkNode next;
 
     public LinkNode(int _val) { val = _val; }
 

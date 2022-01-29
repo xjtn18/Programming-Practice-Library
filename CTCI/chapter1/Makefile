@@ -5,16 +5,22 @@
 # Description: Simple Java Makefile for programming problems.
 ##########################################################################
 
+CLSNAME := Chapter_1
+CLSPATH := /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes
 
-Chapter_1.class: main.java
+$(CLSNAME).class: main.java
 	@echo Building class files...
-	@javac main.java
+	@javac \
+		-d $(CLSPATH) \
+		-cp $(CLSPATH) \
+		main.java
+	@printf "Done!\n\n"
 
-run: Chapter_1.class
-	@java Chapter_1
+run: $(CLSNAME).class
+	@java -cp $(CLSPATH) $(CLSNAME)
 
 runonly:
-	@java Chapter_1
+	@java -cp $(CLSPATH) $(CLSNAME)
 
 clean:
-	rm -rf Chapter_1.class
+	rm -rf $(CLSPATH)/$(CLSNAME).class
