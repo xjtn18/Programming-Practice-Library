@@ -17,7 +17,7 @@ using namespace std;
 //
 // We will recursively search through the permutations. We will stop if the current
 // sum is greater than the target (AKA target becomes negative).
-// We are using a 2d array in place of a hash map because it runs MUCH faster than having
+// We are using a 2d array in place of a hash map because it runs much faster than having
 // a 2D map.
 // For each possible value of one dice roll, subtract that value from target and
 // compute the number of dice rolls that sum to that new difference.
@@ -37,13 +37,13 @@ int memo[31][1001];
 
 
 int solve(int d, int f, int target){
-	if (d==0) return target == 0;
+	if (d == 0) return target == 0;
 
 	int &subcount = memo[d][target]; // reference
 	if (subcount != -1) return subcount;
 
 	subcount = 0;
-	for (int i=1; i<=f && i<=target; i++){
+	for (int i = 1; i <= f && i <= target; i++){
 		subcount = (subcount + solve(d-1, f, target-i)) % MOD;
 	}
 	return subcount % MOD;

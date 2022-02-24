@@ -10,9 +10,6 @@
 
 
 
-// first, write a function that reverses a linked list in a given range
-
-
 ListNode<int> * reverse_k(ListNode<int> *head, int k){
 	if (k == 0) return head;
 	ListNode<int> *prev = nullptr, *next = nullptr;
@@ -64,6 +61,9 @@ int main(){
 	dlog(reverseNodesInKGroups(input, 3));
 
 	input = createLL({2,1,4,3,5});
+	dlog(reverseNodesInKGroups(input, 2));
+
+	input = createLL({1,2,3,4,5});
 	dlog(reverseNodesInKGroups(input, 2));
 
 	input = nullptr;

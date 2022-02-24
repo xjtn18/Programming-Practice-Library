@@ -1,0 +1,4 @@
+Stable vs Unstable sorting methods
+	- Stable: the method maintains the relative ordering of equal value elements.
+	- Unstable: the method has no gaurantee on the ordering of equal value elements.
+

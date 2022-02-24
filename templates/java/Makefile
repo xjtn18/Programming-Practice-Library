@@ -1,24 +1,23 @@
 ##########################################################################
 # Author: Jacob Nardone
 # File Type: GNU Makefile
-# Date Created: 12/29/21
-# Description: Simple Java Makefile for programming problems.
+# Date Created: 2/22/22
+# Description: Simple Java Makefile
 ##########################################################################
 
+mylib := $(shell git rev-parse --show-toplevel)/myjavapkg/classes
 
-Solution.class: main.java
+Solution.class: Solution.java
 	@echo Building class files...
-	@javac \
-		-d /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes \
-		main.java \
-		/Users/Jacob/dev/Programming-Practice-Library/myjavapkg/myjava/LinkNode.java
+	@javac -d $(mylib) -classpath $(mylib) Solution.java # writing class files to same directory as lib classes.
 	@printf "Done!\n\n"
 
 run: Solution.class
-	@java -cp /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes Solution
+	@make runonly
 
 runonly:
-	@java -cp /Users/Jacob/dev/Programming-Practice-Library/myjavapkg/classes Solution
+	@java -classpath $(mylib) Solution # all classes we need will be contained in $(mylib) directory.
 
 clean:
 	rm -rf Solution.class
+

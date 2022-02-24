@@ -19,6 +19,19 @@
 #define not_in(x,y)  y.find(x) == y.end()
 
 
+template <class Val>
+using max_heap = std::priority_queue<Val, std::vector<Val>>;
+
+template <class Val>
+using min_heap = std::priority_queue<Val, std::vector<Val>, std::greater<Val>>;
+
+template <class Key, class Val>
+using umap = std::unordered_map<Key, Val>;
+
+template <class Val>
+using uset = std::unordered_set<Val>;
+
+
 inline void breakpoint(){
 	static int id = 1;
 	std::cout << "--> Breakpoint " << id << std::endl;
@@ -153,7 +166,7 @@ void hlog(Container mat, bool nl = true){
 		}
 		std::cout << "]\n";
 	}
-	if (nl) std::cout << "\n";
+	//if (nl) std::cout << "\n";
 }
 
 
