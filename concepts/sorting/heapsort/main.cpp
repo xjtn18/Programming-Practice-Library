@@ -83,6 +83,10 @@ int main(){
 	heapsort(arr);
 	c_log(arr);
 
+	arr = {1,5,2,3,4,4,0,-10,7,8,5,2,13,4,8,3,4,10,-3,-6,3};
+	heapsort(arr);
+	c_log(arr);
+
 	arr = {1,2,3};
 	heapsort(arr);
 	c_log(arr);
