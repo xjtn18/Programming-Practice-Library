@@ -47,7 +47,7 @@ std::vector<T> merge(const std::vector<T> &arr, int lo, int mid, int hi){
 template <typename T>
 void msort(std::vector<T> &arr, int lo, int hi){
 	// base case
-	if (hi - lo == 1) return;
+	if (hi - lo <= 1) return;
 
 	int mid = lo+((hi-lo)/2); // calculate the middle index
 
@@ -93,6 +93,10 @@ int main(){
 	c_log(arr);
 
 	arr = {1};
+	mergesort(arr);
+	c_log(arr);
+
+	arr = {};
 	mergesort(arr);
 	c_log(arr);
 

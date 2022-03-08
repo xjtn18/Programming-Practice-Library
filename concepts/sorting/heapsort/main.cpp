@@ -103,6 +103,10 @@ int main(){
 	heapsort(arr);
 	c_log(arr);
 
+	arr = {};
+	heapsort(arr);
+	c_log(arr);
+
 	vector<std::string> arrs = {"hello", "matey", "burger", "pop", "pizza", ":)"};
 	heapsort(arrs);
 	c_log(arrs);

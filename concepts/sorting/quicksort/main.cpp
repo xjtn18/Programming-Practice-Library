@@ -131,7 +131,7 @@ int median_of_three(const std::vector<T> &arr, int lo, int hi){
 
 template <typename T>
 int partition(std::vector<T> &arr, int lo, int hi){
-	bool KPCL = true; // stands for "keep pivot clone left"
+	bool keep_left = true; // tracks whether to keep the pivot clone in the left partition.
 	while (lo < hi){
 		if (arr[lo] > arr[lo+1]){
 			std::swap(arr[lo], arr[lo+1]);
@@ -139,15 +139,21 @@ int partition(std::vector<T> &arr, int lo, int hi){
 		} else if (arr[lo] < arr[lo+1]){
 			std::swap(arr[lo+1], arr[hi]);
 			--hi;
-		} else { // they are equal
-			if (KPCL){ // we want to evenly distribute elements equal to the pivot to both partitions.
-				lo += 1; // -> to keep in the left partition
-			} else { // -> to move to the right partition
+		} else { // Evenly distribute elements that are equal to the pivot to both partitions.
+			if (keep_left){ // -> keep in the left partition
+				lo += 1; 
+			} else { // -> move to the right partition
 				std::swap(arr[lo+1], arr[hi]);
 				--hi;
 			}
-			KPCL = !KPCL; // flip partitions for the next pivot-like element.
+			keep_left = !keep_left; // flip partitions for the next pivot-like element.
 		}
+		// @NOTE: You could potentially optimize this by choosing to move pivot clones to
+		// 	the partition that will end up smaller to improve the balanced branching; however,
+		// 	as we scan down the array we dont know yet which partition will be smaller or
+		// 	larger, so it would involve keeping track of the indices to each clone, or
+		// 	sacrificing performance to do a second pass. The actual performance gains are
+		// 	a bit ambiguous, and may even be negligible. Just something to think about..
 	}
 
 	return lo;
@@ -157,9 +163,8 @@ int partition(std::vector<T> &arr, int lo, int hi){
 template <typename T>
 void qsort(std::vector<T> &arr, int lo, int hi){
 	if (hi - lo > CUTOFF){ // (leave the tiny subbarray sorting for insertionsort later on)
-		int pivot = median_of_three(arr, lo, hi);
-		std::swap(arr[lo], arr[pivot]); // move the pivot to the front.
-		pivot = partition(arr, lo, hi); // partition the array assuming the pivot is at the front.
+		std::swap(arr[lo], arr[median_of_three(arr, lo, hi)]); // move the pivot to the front.
+		int pivot = partition(arr, lo, hi); // partition the array assuming the pivot is at the front.
 		qsort(arr, lo, pivot-1);
 		qsort(arr, pivot+1, hi);
 	}
