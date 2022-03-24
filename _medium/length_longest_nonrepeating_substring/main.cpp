@@ -11,7 +11,6 @@
 #include <map>
 
 
-
 // Idea:
 // Loop through the string once.
 // Keep a running integer count of the current length since last duplicate was found.

@@ -32,6 +32,9 @@ OBJS 		:= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(wildcard $(SRCDIR)/*.cpp)
 # creates string list of all our header files
 HEADERS 	:= $(wildcard $(INCDIR)/*.hpp)
 
+.PHONY: run runonly clean
+
+
 # Links object files and generates executable
 $(EXEC): $(OBJS)
 	@echo Linking executable ...
@@ -51,7 +54,7 @@ $(OBJDIR):
 
 # Checks if needs to be rebuilt and runs the executable
 run: $(EXEC)
-	@ ./$(EXEC)
+	@make --no-print-directory runonly
 
 # Just runs the executable
 runonly:
@@ -59,9 +62,8 @@ runonly:
 
 # Cleans all generated files
 clean:
-	@ rm -rf $(EXEC) $(OBJS)
+	@ rm -rf $(EXEC)
 
-.PHONY: run clean
 
 
 
