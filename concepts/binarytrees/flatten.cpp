@@ -20,13 +20,11 @@ void flatten(TreeNode *root){
 
 	if (root->left){
 		flatten(root->left);
-		TreeNode *ptr = root->left;
-		while (ptr->right != nullptr){
-			ptr = ptr->right;
-		}
-		ptr->right = root->right;
+		TreeNode *right = root->right;
 		root->right = root->left;
 		root->left = nullptr;
+		while (root->right) root = root->right;
+		root->right = right;
 	}
 }
 

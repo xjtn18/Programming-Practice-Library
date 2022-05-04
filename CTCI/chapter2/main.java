@@ -2,7 +2,7 @@
 //  Author: Jacob Nardone
 //  Date created: 1/1/22
 //  File type: Java source file
-//  Description: My answers to chapter 1 of Cracking the Coding Interview.
+//  Description: My answers to chapter 2 of Cracking the Coding Interview.
 //////////////////////////////////////////////////////
 
 import java.util.Arrays;

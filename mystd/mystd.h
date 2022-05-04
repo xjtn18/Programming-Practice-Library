@@ -15,8 +15,6 @@
 #define p1(x) std::cout << x << std::endl;
 
 #define std_extend(x,y) (x.insert(x.end(), y.begin(), y.end()))
-#define is_in(x,y)   y.find(x) != y.end()
-#define not_in(x,y)  y.find(x) == y.end()
 
 
 template <class Val>

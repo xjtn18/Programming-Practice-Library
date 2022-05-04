@@ -39,7 +39,7 @@ vector<string> commonChars(vector<string>& words) {
 
 
 int main(){
-	vector<string> words = {"bella", "hello", "belly"};
+	vector<string> words = {"belal", "hello", "belly"};
 	c_log ( commonChars(words) );
 
 

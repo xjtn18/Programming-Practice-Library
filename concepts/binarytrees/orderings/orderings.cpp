@@ -73,17 +73,16 @@ std::list<T> recursive_ordering(TreeNode *root, Order order){
 template <typename T>
 std::list<T> iterative_preorder(TreeNode *root){
 	std::list<T> l;
-	if (!root) return l;
-	std::stack<TreeNode*> stack({root});
+	std::stack<TreeNode*> stk({root});
 
-	while (!stack.empty()){
-		TreeNode *curr = stack.top();
-		stack.pop();
-		if (curr == nullptr) continue;
-		l.push_back(curr->val);
-		stack.push(curr->right);
-		stack.push(curr->left);
+	while (!stk.empty()){
+		root = stk.top();
+		stk.pop();
+		l.push_back(root->val);
+		if (root->right) stk.push(root->right);
+		if (root->left) stk.push(root->left);
 	}
+
 	return l;
 }
 
@@ -91,21 +90,20 @@ std::list<T> iterative_preorder(TreeNode *root){
 template <typename T>
 std::list<T> iterative_inorder(TreeNode *root){
 	std::list<T> l;
-	if (!root) return l;
-	std::stack<TreeNode*> stack;
-	TreeNode *curr = root;
+	std::stack<TreeNode*> stk;
 
-	while (curr || !stack.empty()){
-		if (curr){
-			stack.push(curr);
-			curr = curr->left;
-		} else { // the stack is not empty
-			curr = stack.top();
-			l.push_back(curr->val);
-			stack.pop();
-			curr = curr->right;
+	while (root || !stk.empty()){
+		if (root){
+			stk.push(root);
+			root = root->left;
+		} else {
+			root = stk.top();
+			stk.pop();
+			l.push_back(root->val);
+			root = root->right;
 		}
 	}
+
 	return l;
 }
 
@@ -113,21 +111,27 @@ std::list<T> iterative_inorder(TreeNode *root){
 template <typename T>
 std::list<T> iterative_postorder(TreeNode *root){
 	std::list<T> l;
-	if (!root) return l;
-	std::stack<TreeNode*> stack({root});
-	std::unordered_set<TreeNode*> explored = {nullptr};
+	std::stack<TreeNode*> stk;
+	TreeNode *pre = nullptr;
 
-	while (!stack.empty()){
-		TreeNode *node = stack.top();
-		if ((is_in(node->left, explored) && is_in(node->right, explored))){
-			l.push_back(node->val);
-			explored.insert(node);
-			stack.pop();
+	while (root || !stk.empty()){
+		if (root){
+			stk.push(root);
+			root = root->left;
+
+		} else {
+			root = stk.top();
+			if (!root->right || root->right == pre){
+				stk.pop();
+				l.push_back(root->val);
+				pre = root;
+				root = nullptr;
+			} else {
+				root = root->right;
+			}
 		}
-
-		if (not_in(node->right, explored)) 	stack.push(node->right);
-		if (not_in(node->left, explored)) 	stack.push(node->left);
 	}
+
 	return l;
 }
 

@@ -2,10 +2,13 @@
 # Author: Jacob Nardone
 # File Type: GNU Makefile
 # Date Created: 4/9/2021
-# Description: Flexible C makefile for ranging project file structures.
+# Description: Makefile for Google Kickstart C++ problems.
 ##########################################################################
 
-# FILL IN THE SECTION BELOW #
+ifndef p:
+	p := 1
+endif
+
 #----------------------------------------------------------------#
 #----------------------------------------------------------------#
 # name of dir that stores source files
@@ -27,34 +30,21 @@ LFLAGS	:= -L$(LIBPATH) -lmystd
 #----------------------------------------------------------------#
 #----------------------------------------------------------------#
 
-# creates string list of object files we need to create
-OBJS 		:= $(patsubst $(SRCDIR)/%.cpp, $(OBJDIR)/%.o, $(wildcard $(SRCDIR)/*.cpp))
-# creates string list of all our header files
-HEADERS 	:= $(wildcard $(INCDIR)/*.hpp)
-
-.PHONY: run runonly clean
-
 
 # Links object files and generates executable
-$(EXEC): $(OBJS)
-	@echo Linking executable ...
-	@$(CC) $^ $(LFLAGS) -o $@
-	@rm -rf $(OBJS)
-	@echo Done.
-	@printf "\n"
-
-# Creates every object file we need in OBJS using corresponding source file + headers
-$(OBJDIR)/%.o: $(SRCDIR)/%.cpp $(HEADERS) | $(OBJDIR)
-	@echo Compiling $< ...
-	@$(CC) $< -c $(CFLAGS) -o $@
-
-# Builds the object file directory if not already there
-$(OBJDIR):
-	mkdir -p $@
+$(EXEC):
+	@ echo Linking executable ...
+	@ $(CC) $(CFLAGS) $(LFLAGS) p$(p).cpp -o $@
+	@ echo Done.
+	@ printf "\n"
 
 # Checks if needs to be rebuilt and runs the executable
-run: $(EXEC)
-	@make --no-print-directory runonly
+runn: $(EXEC)
+	@ ./$(EXEC)
+
+run:
+	@ make clean
+	@ make runn
 
 # Just runs the executable
 runonly:
@@ -62,8 +52,9 @@ runonly:
 
 # Cleans all generated files
 clean:
-	@ rm -rf $(EXEC)
+	@ rm -f $(EXEC)
 
+.PHONY: run clean
 
 
 

@@ -15,17 +15,14 @@ void solve(){
 
 
 int main(){
-	ifstream cin("tests.txt"); //NOTE: Comment out this line before submission
+	ifstream cin("tests.txt"); //NOTE: Comment this line before submission
 
 	int T; cin >> T; // the number of testcases
-
-	// declare input variables here
-	string token;
+	// declare other input variables here
 	
 	for (int i = 1; i < T+1; ++i){
 		// cin >> ;
-
-		cout << "Case #" << i << ": " << solve();
+		solve(); // pass input variables to 'solve'
 	}
 
 	return 0;

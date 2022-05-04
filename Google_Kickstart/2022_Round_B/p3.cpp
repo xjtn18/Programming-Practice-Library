@@ -8,24 +8,24 @@ using namespace std;
 
 
 
-void solve(){
 
+void solve(){
+	
 }
 
 
 
 int main(){
-	ifstream cin("tests.txt"); //NOTE: Comment out this line before submission
+	ifstream cin("tests.txt"); //NOTE: Comment this line before submission
 
 	int T; cin >> T; // the number of testcases
-
-	// declare input variables here
-	string token;
+	// declare other input variables here
 	
 	for (int i = 1; i < T+1; ++i){
-		// cin >> ;
 
-		cout << "Case #" << i << ": " << solve();
+
+
+		printf("Case #%d: %d\n", i, ans);
 	}
 
 	return 0;

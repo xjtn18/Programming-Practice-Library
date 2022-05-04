@@ -1,5 +1,4 @@
 #!/bin/zsh
-emulate -LR zsh
 
 name=$1
 lang=$2

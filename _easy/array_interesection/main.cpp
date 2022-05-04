@@ -6,10 +6,7 @@
 //////////////////////////////////////////////////////
 
 
-#include <iostream>
-#include "../../debug.h"
-#include <unordered_map>
-
+#include <mystd.h>
 using namespace std;
 
 
@@ -29,23 +26,10 @@ vector<int> intersect(vector<int>& nums1, vector<int>& nums2){
 	vector<int> isec;
 	unordered_map<int, int> hmap;
 
-	const vector<int> *smaller, *bigger;
+	for (const int& e : nums1) hmap[e]++;
 
-	if (nums1.size() < nums2.size()){
-		smaller = &nums1;
-		bigger = &nums2;
-	} else {
-		smaller = &nums2;
-		bigger = &nums1;
-	}
-
-
-	for (const int& e : *smaller){
-		hmap[e] = (hmap.find(e) == hmap.end()) ? 1 : hmap[e] + 1;
-	}
-
-	for (const int& e : *bigger){
-		if (hmap.find(e) != hmap.end() && hmap[e] != 0){
+	for (const int& e : nums2){
+		if (hmap.count(e) && hmap[e] != 0){
 			isec.push_back(e);
 			hmap[e]--;
 		}
@@ -59,7 +43,7 @@ vector<int> intersect(vector<int>& nums1, vector<int>& nums2){
 int main(){
 	vector<int> n1 {1,2,2,3};
 	vector<int> n2 {2,2};
-	log(intersect(n1, n2));
+	c_log(intersect(n1, n2));
 
 	return 0;
 }
