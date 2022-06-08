@@ -9,10 +9,9 @@ if [ $lang = "sql" ]; then
 else
 	dir="_$diff/$name"
 	if [ -d $dir ]; then
-		printf "Problem with this name already exists.\n"
+		printf "Problem with this name & difficulty already exists.\n"
 		return 1
 	fi
-
 	mkdir $dir
 fi
 
@@ -26,7 +25,7 @@ if [ $lang = "cpp" ]; then
 fi
 
 if [ $lang = "python" ]; then
-	cp templates/python_template.txt $dir/main.py
+	cp -r templates/python/* $dir/
 	printf "Created Python problem at $dir\n"
 	sleep 1
 	cd $dir
