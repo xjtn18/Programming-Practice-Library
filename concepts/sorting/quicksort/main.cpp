@@ -18,7 +18,7 @@ Idea behind quick sort:
 	entire array is sorted.
 
 	@NOTE: In the worst case, the pivot that is chosen is the smallest or largest element in the sub-
-	array, and this mean s the recursive call only makes a recursive call on the the same list
+	array, and this means the recursive call only makes a recursive call on the the same list
 	sans the pivot element, which represent near linear branching factor, making the algorithm
 	potentially run at O(N^2). There is no perfect pivot selection algorithm, however, there is one
 	that performs the best most of the time and prevents the quadratic runtime when sorting arrays
@@ -35,7 +35,7 @@ Idea behind quick sort:
 	aspect of it for low N.
 	
 	@NOTE: While I used size_t to represent the indices in heap sort and merge sort, I've decided
-	to use int here for quicksort for the sake of keeping the code clean and adding extra 'if'
+	to use int here for quicksort for the sake of keeping the code clean and preventing extra 'if'
 	blocks. The reason for this because sometimes quicksort will make a recursive call with a
 	negative value for hi (meaning partition chose the first index as the pivot). Size_t's are
 	unsigned, and you start getting segfaults because when they dip into the negative, they
@@ -135,7 +135,7 @@ int partition(std::vector<T> &arr, int lo, int hi){
 	while (lo < hi){
 		if (arr[lo] > arr[lo+1]){
 			std::swap(arr[lo], arr[lo+1]);
-			lo += 1;
+			++lo;
 		} else if (arr[lo] < arr[lo+1]){
 			std::swap(arr[lo+1], arr[hi]);
 			--hi;

@@ -1,9 +1,9 @@
 //////////////////////////////////////////////////////
-//  Author: Jacob Nardone
-//  Date created: 6/17/2020
-//  File type: C++ header file
-//  Description: Helper functions I made to debug/print objects, strings, etc. 
-//  			and to create/initialize common data structures.
+// Author: Jacob Nardone
+// Date created: 6/17/2020
+// File type: C++ header file
+// Description: Helper functions I made to debug/print objects, strings, etc. 
+//              and to create/initialize common data structures.
 //////////////////////////////////////////////////////
 
 #pragma once
@@ -39,14 +39,14 @@ inline void breakpoint(){
 #define BP breakpoint();
 
 
-inline void say_all(){ std::cout << "\n"; }
+inline void say_all(){ std::cout << ")\n"; }
 
 template<typename Head, typename... Tail>
 void say_all(Head H, Tail... T){
-	std::cout << " " << H;
+	std::cout << H << (sizeof...(Tail) > 0 ? ", " : "");
 	say_all(T...);
 }
-#define say(...) std::cout << "(" << #__VA_ARGS__ << ") =\t", say_all(__VA_ARGS__)
+#define say(...) std::cout << "(" << #__VA_ARGS__ << ") = (", say_all(__VA_ARGS__)
 
 
 
@@ -109,8 +109,8 @@ template <typename Container>
 void c_log(Container l, bool nl = true){
 	std::cout << '[';
 	for (auto iter = l.begin(); iter != l.end(); ++iter){
-		dlog (*iter, false);
-		if (!is_last(iter,l))
+		dlog(*iter, false);
+		if (!is_last(iter, l))
 			std::cout << ", ";
 	}
 	std::cout << ']';
@@ -123,7 +123,7 @@ void qlog(std::queue<T> q, bool nl = true){
 	std::cout << '[';
 	while(!q.empty()){
 		T val = q.front();
-		dlog (val, false);
+		dlog(val, false);
 		if (q.size() > 1)
 			std::cout << ", ";
 		q.pop();
@@ -155,10 +155,7 @@ void hlog(Container mat, bool nl = true){
 		std::cout << '[';
 		for (auto& value : subcontainer){
 			//std::cout << std::setw(4) << value;
-			if (value == INT_MAX)
-				dlog("#", false);
-			else
-				dlog(value, false);
+			dlog(value, false);
 			dlog("  ", false);
 			//std::cout << std::setw(6) << std::endl;
 		}
@@ -200,6 +197,11 @@ void m2log(Container dict, bool nl = true){
 	}
 	if (nl) std::cout << "\n";
 }
+
+
+
+std::vector<int> gen1d(const std::string&);
+std::vector<std::vector<int>> gen2d(const std::string&);
 
 
 

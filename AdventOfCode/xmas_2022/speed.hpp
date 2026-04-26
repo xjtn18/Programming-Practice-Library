@@ -1,5 +1,4 @@
 #include <mystd.h>
-#include <execution>
 #include <windows.h>
 
 
@@ -7,7 +6,7 @@
 //////////////////////////////////////////////////////////////////
 // Debugging
 
-void sleep(int seconds){
+void sleep(float seconds){
 	Sleep(seconds * 1000);
 }
 // ------------------------------------------------------------ //
@@ -37,12 +36,65 @@ T pi(std::vector<T> v){
 //////////////////////////////////////////////////////////////////
 // Graph
 
-// Plot on a Cartesian plane
-struct Plot {
+// s2 (scalar 2 dimensions) point on a Cartesian plane
+struct s2 {
 	int x, y;
-	Plot() : x(int()), y(int()) { }
-	Plot(int x, int y) : x(x), y(y) { }
+
+	s2() : x(int()), y(int()) { }
+	s2(int x, int y) : x(x), y(y) { }
+
+	s2 operator+(const s2& other) const {
+		return s2(x + other.x, y + other.y);
+	}
+
+	s2 operator-(const s2& other) const {
+		return s2(x - other.x, y - other.y);
+	}
+
+	s2 operator+=(const s2 &rhs){
+		this->x += rhs.x;
+		this->y += rhs.y;
+		return *this;
+	}
+
+	s2 operator-=(const s2 &rhs){
+		this->x -= rhs.x;
+		this->y -= rhs.y;
+		return *this;
+	}
+
+	bool operator==(const s2 &rhs) const {
+		return (this->x == rhs.x && this->y == rhs.y);
+	}
 };
+
+// Make s2 printable
+std::ostream &operator<<(std::ostream &out, const s2 &_s2){
+	out << "(" << _s2.x << ", " << _s2.y << ")";
+	return out;
+}
+
+
+
+// Make s2 hashable
+namespace std {
+
+	template <>
+	struct hash<s2> {
+		std::size_t operator()(const s2& p) const {
+			using std::size_t;
+			using std::hash;
+			using std::string;
+
+			// Compute individual hash values for first,
+			// second and third and combine them using XOR
+			// and bit shifting:
+
+			return ((hash<int>()(p.x)
+					 ^ (hash<int>()(p.y) << 1)) >> 1);
+		}
+	};
+}
 
 //////////////////////////////////////////////////////////////////
 
@@ -124,7 +176,12 @@ template <typename T>
 struct record : public std::vector<T> {
 
 	// Constructor
-	record<T>(int sz) : std::vector<T>(sz) { }
+	record<T>(int sz = 0, T init = T()) : std::vector<T>(sz, init) { }
+
+	// Initializer list constructor
+	record(std::initializer_list<T> l) {
+		std::vector<T>::operator=(l);
+	}
 
 	T &operator[](int index){
 		int sz = std::vector<T>::size();

@@ -6,7 +6,6 @@
 //                  the shortest path from 'start' position to 'goal' position.
 //////////////////////////////////////////////////////
 
-
 #include <mystd.h>
 #include <fstream>
 using namespace std;
@@ -21,6 +20,7 @@ using namespace std;
 // By extension, this means we will have the shortest paths to all of the reachable exits.
 // Whichever reachable exit has the shortest path to the start, the length of that path will be our answer.
 //
+
 
 struct Vertex {
 	int id, distance;

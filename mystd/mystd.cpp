@@ -87,6 +87,57 @@ void dlog(TreeNode* root){
 
 
 
+std::vector<int> gen1d(const std::string& sarr){
+	int sz = 1;
+	for (const char& s : sarr) sz += (s == ',');
+
+	std::vector<int> arr(sz);
+
+	std::string token = "";
+	int j = 0;
+	for (int i = 1; i < sarr.size(); ++i){
+		if (sarr[i] == ',' || sarr[i] == ']'){
+			arr[j] = stoi(token);
+			token = "";
+			j++;
+		} else {
+			token += sarr[i];
+		}
+	}
+
+	return arr;
+}
+
+
+std::vector<std::vector<int>> gen2d(const std::string& sarr){
+	// count commas to get the size of the array
+	int sz = 1, depth = 0;
+	for (int i = 0; i < sarr.size(); ++i){
+		if (sarr[i] == '[') ++depth;
+		else if (sarr[i] == ']') --depth;
+		else sz += (depth == 1 && sarr[i] == ',');
+	}
+
+	std::vector<std::vector<int>> arr(sz);
+
+	depth = 0;
+	std::string token = "";
+	int j = 0;
+	for (int i = 1; i < sarr.size()-1; ++i){
+		token += sarr[i];
+		if (sarr[i] == ']'){
+			arr[j] = gen1d(token);
+			++j; ++i;
+			token = "";
+		}
+	}
+	
+	return arr;
+}
+
+
+
+
 // Random arrays/matrices
 
 std::vector<int> irandarray(const size_t len, const int x, const int y){
@@ -106,11 +157,13 @@ vec2D<int> irandmatrix(const size_t m, const size_t n, const int x, const int y)
 	vec2D<int> mat;
 	mat.reserve(m);
 	for (int i = 0; i < m; ++i){
-		mat.push_back(move(irandarray(n, x, y)));
+		mat.push_back(std::move(irandarray(n, x, y)));
 	}
 
 	return mat;
 };
+
+
 
 
 

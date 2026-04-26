@@ -22,13 +22,13 @@ OBJDIR 	:= .
 # name of your final executable
 EXEC 		:= $(d).exe
 # your C compiler
-CC			:= "C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\Llvm\bin\clang++.exe"
+CC			:= "C:\ProgramData\chocolatey\bin\g++.exe"
 # compilation flags
 LIBPATH	:= $(shell git rev-parse --show-toplevel)/mystd
 CFLAGS	:= -I$(INCDIR) -I$(LIBPATH) \
 				-std=c++17 -Wfatal-errors
 # linker flags
-LFLAGS	:= -L$(LIBPATH) -llibmystd
+LFLAGS	:= -L$(LIBPATH) -lmystd
 #----------------------------------------------------------------#
 #----------------------------------------------------------------#
 
@@ -74,7 +74,7 @@ new: $(d).cpp input/$(d).input
 
 # Cleans all generated files
 clean:
-	@ del *.exe
+	@ del *.exe 2>nul
 
 
 

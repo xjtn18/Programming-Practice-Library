@@ -6,7 +6,7 @@ using namespace std;
 // ------------ Solution ------------ //
 
 
-umap<char, Plot> dirmap = {
+umap<char, s2> dirmap = {
 	{ 'R', { 1, 0} },
 	{ 'L', {-1, 0} },
 	{ 'U', { 0, 1} },
@@ -51,55 +51,50 @@ void part_1(vector<string> lines){
 }
 
 
+umap<char, s2> dirmap = {
+	{ 'R', { 1, 0} },
+	{ 'L', {-1, 0} },
+	{ 'U', { 0, 1} },
+	{ 'D', { 0,-1} }
+};
 
 void part_2(vector<string> lines){
-	umap<int, uset<int>> visited;
-	int hx = 0, hy = 0;
-	record<Plot> knots(9);
+	uset<s2> visited;
+	s2 head;
+	record<s2> knots(9);
 
 	for (string l : lines){
 		auto tokens = split(l, " ");
-		char direc = tokens[0][0];
+		char dir = tokens[0][0];
 		int steps = stoi(tokens[1]);
 
-		for (int i = 0; i < steps; ++i){
-			int dx = dirmap[direc].x;
-			int dy = dirmap[direc].y;
-			hx += dx;
-			hy += dy;
+		while (steps--){
+			head += dirmap[dir];
+			s2 prev = head;
 
-			int lastx = hx, lasty = hy;
+			for (auto &knot : knots){
+				s2 diff = prev - knot;
 
-			for (int j = 0; j < knots.size(); ++j){
-				int &tx = knots[j].x;
-				int &ty = knots[j].y;
-				int diffx = lastx - tx;
-				int diffy = lasty - ty;
-
-				if (abs(diffx) == 2 && abs(diffy) == 2){
-					tx += diffx / 2;
-					ty += diffy / 2;
+				if (abs(diff.x) == 2 && abs(diff.y) == 2){
+					knot.x += diff.x / 2;
+					knot.y += diff.y / 2;
+				} else if (abs(diff.x) == 2){
+					knot.x += diff.x / 2;
+					knot.y += diff.y;
+				} else if (abs(diff.y) == 2){
+					knot.y += diff.y / 2;
+					knot.x += diff.x;
 				}
-				else if (abs(diffx) == 2){
-					tx += diffx / 2;
-					ty += diffy;
-				} else if (abs(diffy) == 2){
-					ty += diffy / 2;
-					tx += diffx;
-				}
-				lastx = tx;
-				lasty = ty;
+					
+				prev = knot;
 			}
 
-			visited[knots[-1].x].insert(knots[-1].y);
+			visited.insert(knots[-1]);
 		}
 
 	}
 	
-	long sigma = 0;
-	for (auto [_, group] : visited) sigma += group.size();
-
-	cout << "Part 2 - Answer is: " << sigma << endl;
+	cout << "Part 2 - Answer is: " << visited.size() << endl;
 }
 
 // ----------------------------------- //
@@ -114,10 +109,6 @@ int main(int argc, char *argv[]){
 
 	part_1(lines);
 	part_2(lines);
-
-	Plot head(4,5);
-	say(head.x, head.y);
-	say(head.y);
 
 }
 

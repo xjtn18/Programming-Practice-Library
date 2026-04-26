@@ -101,7 +101,6 @@ public:
 
 
 
-
 class Graph {
 
 	Vertex* vertices;

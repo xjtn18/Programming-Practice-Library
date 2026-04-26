@@ -51,8 +51,6 @@ ListNode<int>* addTwoNumbers(ListNode<int>* l1, ListNode<int>* l2) {
 
 
 int main(){
-
-
 	ListNode<int> *l1 = createLL({9,9,9,9,9,9,9});
 	ListNode<int> *l2 = createLL({9,9,9,9});
 	dlog(addTwoNumbers(l1, l2));
